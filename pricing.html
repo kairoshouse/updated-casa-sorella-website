@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pricing — Casa Sorella</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:      #002147;
+  --cream:     #F9F8F3;
+  --off-white: #F2F0EB;
+  --white:     #FDFDFD;
+  --blue:      #E3E9F0;
+  --gold:      #B8955A;
+  --muted:     rgba(0,33,71,0.50);
+  --faint:     rgba(0,33,71,0.26);
+  --border:    rgba(0,33,71,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--navy); -webkit-font-smoothing: antialiased; line-height: 1; letter-spacing: .01em; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--navy); display: flex; align-items: center; padding: 0 48px; height: 62px; }
+.nav__logo { font-family: 'Playfair Display', serif; font-size: .92rem; font-weight: 700; color: #fff; letter-spacing: .08em; margin-right: auto; line-height: 1.18; }
+.nav__links { display: flex; list-style: none; gap: 28px; margin-right: 28px; }
+.nav__links a { font-size: .68rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.65); transition: color .2s; }
+.nav__links a:hover, .nav__links a.active { color: #fff; }
+.nav__cta { font-size: .64rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; background: #fff; color: var(--navy); padding: 9px 22px; transition: opacity .2s; white-space: nowrap; }
+.nav__cta:hover { opacity: .85; }
+.nav__ham { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav__ham span { display: block; width: 22px; height: 1.5px; background: #fff; }
+
+/* MOBILE */
+.mob-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.42); z-index: 300; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.mob-overlay.open { opacity: 1; pointer-events: all; }
+.mob-menu { position: fixed; top: 0; right: 0; bottom: 0; width: 265px; background: var(--navy); z-index: 400; display: flex; flex-direction: column; padding: 68px 32px 32px; gap: 20px; transform: translateX(100%); transition: transform .32s cubic-bezier(.16,1,.3,1); }
+.mob-menu.open { transform: translateX(0); }
+.mob-menu__close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; }
+.mob-menu a { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.72); }
+
+/* PAGE HEADER */
+.page-hdr { background: var(--navy); padding: 112px 48px 68px; margin-top: 62px; }
+.page-hdr__inner { max-width: 1060px; margin: 0 auto; }
+.page-hdr__eyebrow { font-size: .56rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.34); display: block; margin-bottom: 16px; }
+.page-hdr__title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem,4.2vw,3.4rem); font-weight: 800; color: #fff; line-height: 1.04; letter-spacing: -.01em; margin-bottom: 16px; }
+.page-hdr__sub { font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.46); line-height: 2; max-width: 500px; letter-spacing: .025em; }
+
+/* LAYOUT */
+.wrap { max-width: 1060px; margin: 0 auto; }
+.sec { padding: 88px 48px; }
+.sec--white  { background: var(--cream); }
+.sec--cream  { background: var(--cream); }
+.sec--off    { background: var(--off-white); }
+.sec--blue   { background: var(--blue); }
+
+.eyebrow { font-size: .56rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 14px; }
+.serif-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem,2.8vw,2.2rem); font-weight: 700; line-height: 1.18; }
+.body-text { font-size: .8rem; font-weight: 300; line-height: 2; color: var(--muted); letter-spacing: .02em; }
+.gold-rule { display: block; width: 36px; height: 1.5px; background: var(--gold); margin: 16px 0 30px; }
+
+/* BUTTONS */
+.btn { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: .63rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 14px 36px; transition: opacity .2s, background .2s, color .2s; cursor: pointer; border: none; line-height: 1; }
+.btn--navy { background: var(--navy); color: #fff; } .btn--navy:hover { opacity: .82; }
+.btn--outline { background: transparent; border: 1.5px solid var(--navy); color: var(--navy); }
+.btn--outline:hover { background: var(--navy); color: #fff; }
+
+/* CTA BAND */
+.cta-band { background: var(--off-white); border-top: 1px solid var(--border); padding: 72px 48px; }
+.cta-band__inner { max-width: 1060px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.cta-band__title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem,2.2vw,1.7rem); font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.cta-band__sub { font-size: .76rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+/* FOOTER */
+.footer { background: var(--navy); padding: 56px 48px 26px; }
+.footer__inner { max-width: 1060px; margin: 0 auto; }
+.footer__grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1.3fr; gap: 44px; margin-bottom: 44px; }
+.footer__logo { font-family: 'Playfair Display', serif; font-size: .88rem; font-weight: 700; color: #fff; display: block; margin-bottom: 12px; letter-spacing: .08em; line-height: 1.18; }
+.footer__tag { font-size: .66rem; font-weight: 300; color: rgba(255,255,255,.32); line-height: 1.75; margin-bottom: 18px; }
+.footer__badges { display: flex; gap: 9px; }
+.footer__badge { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 5px; }
+.footer__badge-text { font-size: .36rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.58); line-height: 1.35; }
+.footer__col-title { font-size: .54rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.32); display: block; margin-bottom: 15px; }
+.footer__links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer__links a { font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.5); transition: color .2s; letter-spacing: .04em; }
+.footer__links a:hover { color: #fff; }
+.footer__contact { font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.5); display: block; margin-bottom: 7px; letter-spacing: .03em; }
+.specs-btn { background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: .68rem; font-weight: 300; color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 5px; padding: 0; transition: color .2s; }
+.specs-btn:hover { color: #fff; }
+.specs-btn .arr { transition: transform .28s; font-size: .58rem; }
+.specs-btn.open .arr { transform: rotate(180deg); }
+.specs-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.specs-body.open { max-height: 160px; }
+.specs-note { margin-top: 12px; font-size: .62rem; font-weight: 300; color: rgba(255,255,255,.26); line-height: 1.72; }
+.footer__bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.footer__bottom p { font-size: .6rem; font-weight: 300; color: rgba(255,255,255,.22); }
+
+@media (max-width: 900px) {
+  .nav { padding: 0 20px; } .nav__links { display: none; } .nav__ham { display: flex; order: -1; margin-right: 14px; } .nav__logo { margin-right: auto; } .nav__cta { display: none; }
+  .sec { padding: 60px 20px; } .page-hdr { padding: 96px 20px 52px; }
+  .footer { padding: 44px 20px 22px; } .footer__grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .cta-band { padding: 52px 20px; }
+}
+@media (max-width: 520px) { .footer__grid { grid-template-columns: 1fr; } }
+
+
+.pr-row { display: grid; grid-template-columns: 1fr 2.2fr; gap: 56px; padding: 56px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.pr-row:last-child { border-bottom: none; }
+.pr-anchor { font-family: 'Playfair Display', serif; font-size: 3.4rem; font-weight: 800; color: var(--navy); line-height: 1; }
+.pr-anchor sup { font-size: 1.2rem; vertical-align: top; margin-top: 6px; display: inline-block; opacity: .55; }
+.pr-anchor-label { font-size: .54rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); display: block; margin-top: 8px; }
+.pr-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+.pr-sub { font-size: .6rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 16px; }
+.pr-body { font-size: .78rem; font-weight: 300; line-height: 1.85; color: var(--muted); margin-bottom: 14px; }
+.pr-note { font-size: .74rem; font-weight: 300; color: var(--muted); line-height: 1.75; padding: 16px 0; border-top: 1px solid var(--border); margin-top: 10px; }
+.pr-note strong { font-weight: 500; color: var(--navy); }
+.always-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+.always-cell { background: var(--white); padding: 44px 40px; }
+.always-big { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+.always-label { font-size: .56rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; display: block; }
+.always-desc { font-size: .74rem; font-weight: 300; color: var(--muted); line-height: 1.72; }
+@media (max-width: 700px) { .pr-row { grid-template-columns: 1fr; gap: 20px; } .always-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav__logo">CASA<br>SORELLA</a>
+  <ul class="nav__links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="booking.html">Book Now</a></li>
+  </ul>
+  <a href="booking.html" class="nav__cta">Get Started</a>
+  <button class="nav__ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-menu__close" id="mobClose">×</button>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="booking.html">Book Now</a>
+</div>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-menu__close" id="mobClose">×</button>
+  <a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="booking.html">Book Now</a>
+</div>
+
+<header class="page-hdr">
+  <div class="page-hdr__inner">
+    <span class="page-hdr__eyebrow">No Surprises</span>
+    <h1 class="page-hdr__title">Pricing</h1>
+    <p class="page-hdr__sub">The quote you receive is the only invoice you pay. We have eliminated the hourly unknown of the gig economy to provide a stress-free experience.</p>
+  </div>
+</header>
+
+<section class="sec sec--white">
+  <div class="wrap">
+    <div class="pr-row">
+      <div>
+        <div class="pr-anchor"><sup>$</sup>175</div>
+        <span class="pr-anchor-label">Fixed · Labor</span>
+      </div>
+      <div>
+        <h2 class="pr-title">TV Mounting</h2>
+        <span class="pr-sub">$175 Labor · Hardware Upon Request</span>
+        <p class="pr-body">Premium flat or full-motion hardware is available upon request. Flat/tilting mounts ($50) or full-motion articulating mounts ($100) will be added to your quote if needed.</p>
+        <div class="pr-note"><strong>TVs 65" and larger</strong> require a second technician for a safe lift. A flat fee applies and will be confirmed before your appointment.</div>
+      </div>
+    </div>
+
+    <div class="pr-row">
+      <div>
+        <div class="pr-anchor" style="font-size:2rem;line-height:1.15;">Custom<br>Quoted</div>
+        <span class="pr-anchor-label">Within 24 hours</span>
+      </div>
+      <div>
+        <h2 class="pr-title">Art, Decor &amp; Furniture</h2>
+        <span class="pr-sub">Tailored to Your Project</span>
+        <p class="pr-body">Because every space and vision is unique, we provide tailored quotes within 24 hours of your request. Whether it is a single statement mirror or a full-apartment assembly, your price is locked in before we arrive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--blue" style="border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="margin-bottom:36px;">
+      <span class="eyebrow">Always Included</span>
+      <h2 class="serif-title">The standard, not the exception.</h2>
+    </div>
+    <div class="always-grid">
+      <div class="always-cell">
+        <div class="always-big">$1MM</div>
+        <span class="always-label">Liability Coverage</span>
+        <p class="always-desc">Your property is fully protected on every project.</p>
+      </div>
+      <div class="always-cell">
+        <div class="always-big">Zero</div>
+        <span class="always-label">Hourly Surprises</span>
+        <p class="always-desc">We stay until the job is perfect, at no extra cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="cta-band__inner">
+    <div>
+      <h2 class="cta-band__title">Have a project in mind?</h2>
+      <p class="cta-band__sub">Submit a request and receive a fixed quote within 24 hours.</p>
+    </div>
+    <a href="booking.html" class="btn btn--navy">Get Started</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div>
+        <a href="index.html" class="footer__logo">CASA<br>SORELLA</a>
+        <p class="footer__tag">Elevated Home Services<br>for the Modern Professional.</p>
+        <div class="footer__badges">
+          <div class="footer__badge"><span class="footer__badge-text">Licensed GC</span></div>
+          <div class="footer__badge"><span class="footer__badge-text">$1MM Insured</span></div>
+        </div>
+      </div>
+      <div>
+        <span class="footer__col-title">Pages</span>
+              <ul class="footer__links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="booking.html">Book Now</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer__col-title">Contact</span>
+        <a href="sms:+12029687878" class="footer__contact">(202) 968-7878</a>
+        <a href="/cdn-cgi/l/email-protection#345c5158585b745755475519475b46515858551a575b59" class="footer__contact"><span class="__cf_email__" data-cfemail="1b737e7777745b787a687a366874697e77777a35787476">[email&#160;protected]</span></a>
+        <span class="footer__contact" style="opacity:.6">Mon – Sat</span>
+      </div>
+      <div>
+        <span class="footer__col-title">Notes</span>
+        <button class="specs-btn" id="specsBtn">View <span class="arr">▾</span></button>
+        <div class="specs-body" id="specsBody">
+          <p class="specs-note">We specialise in precision surface mounting and external concealment. In-wall electrical work is not provided.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 Casa Sorella. All rights reserved.</p>
+      <p>Licensed General Contractor · $1MM Insured</p>
+    </div>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const ham=document.getElementById("ham"),mm=document.getElementById("mobMenu"),
+      mo=document.getElementById("mobOverlay"),mc=document.getElementById("mobClose");
+ham.addEventListener("click",()=>{mm.classList.add("open");mo.classList.add("open");});
+mc.addEventListener("click",()=>{mm.classList.remove("open");mo.classList.remove("open");});
+mo.addEventListener("click",()=>{mm.classList.remove(
